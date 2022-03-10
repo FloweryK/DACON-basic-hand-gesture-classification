@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-from PIL import Image
 from torch.utils.data import Dataset
 
 class GestureDataset(Dataset):
@@ -13,7 +12,12 @@ class GestureDataset(Dataset):
         self.targets = self.df[:, -1]
 
         # normalize
-        self.sensors = (self.sensors - self.sensors.min(axis=0)) / (self.sensors.max(axis=0) - self.sensors.min(axis=0))
+        # self.sensors = np.transpose(self.sensors)
+        # self.sensors = (self.sensors - self.sensors.min(axis=0)) / (self.sensors.max(axis=0) - self.sensors.min(axis=0))
+        # self.sensors = (self.sensors - self.sensors.mean(axis=0)) / self.sensors.std(axis=0)
+        # self.sensors = np.transpose(self.sensors)
+        # self.sensors = (self.sensors - self.sensors.min(axis=0)) / (self.sensors.max(axis=0) - self.sensors.min(axis=0))
+        # self.sensors = (self.sensors - self.sensors.mean(axis=0)) / self.sensors.std(axis=0)
 
         self.len = len(self.df)
 
@@ -22,7 +26,7 @@ class GestureDataset(Dataset):
         
     def __getitem__(self, index):
         x = self.sensors[index]
-        target = self.targets[index]
+        target = int(self.targets[index])
         return x, target
 
 

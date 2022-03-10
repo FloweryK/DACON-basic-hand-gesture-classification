@@ -19,16 +19,16 @@ class Model(nn.Module):
         super().__init__()
         self.linear1 = nn.Sequential(
             LinearBlock(32, 128),
-            nn.Dropout(0.5)
+            # nn.Dropout(0.5)
         )
         self.linear2 = nn.Sequential(
             LinearBlock(128, 128),
-            nn.Dropout(0.5)
+            # nn.Dropout(0.5)
         )
-        self.linear3 = nn.Sequential(
-            LinearBlock(128, 128),
-            nn.Dropout(0.5)
-        )
+        # self.linear3 = nn.Sequential(
+        #     LinearBlock(128, 128),
+        #     # nn.Dropout(0.5)
+        # )
         self.linear4 = nn.Sequential(
             nn.Linear(128, 4)
         )
@@ -36,7 +36,7 @@ class Model(nn.Module):
     def forward(self, x):
         x = self.linear1(x)
         x = self.linear2(x)
-        x = self.linear3(x)
+        # x = self.linear3(x)
         x = self.linear4(x)
         return x
 
